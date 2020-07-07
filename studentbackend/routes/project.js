@@ -26,7 +26,7 @@ router.post('/createproject',(req,res)=>{
         console.log(err)
     })
 })
-// _id and name are fields in student table 
+// currently it is returning all the data as there is no student data
 router.get('/myproject',(req,res)=>{
     Project.find() 
     .then(myproject=>{
