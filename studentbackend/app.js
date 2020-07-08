@@ -7,9 +7,11 @@ const {MONGOURI} = require('./keys')
 const profileRoutes = require('./routes/profileDetails')
 
 require('./models/project')
+require('./routes/assignment')
 
 app.use(express.json())
 app.use(require('./routes/project'))
+app.use(require('./routes/assignment'))
 
 app.use('/profile',profileRoutes)
 app.use('/uploads',express.static('../Student/uploads'))
