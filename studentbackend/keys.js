@@ -1,4 +1,4 @@
 module.exports={
-    MONGOURI : "link to database",
+    MONGOURI : 'mongodb://localhost/student-backend',
     JWT_SECRET : "<any random string>"
 }
