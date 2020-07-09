@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-const Assignment = mongoose.model('Assignment')
+const Assignment = require('../models/assignment')
 
 
 // To create the assignment (but there is no button on the front end side to create the assignment)

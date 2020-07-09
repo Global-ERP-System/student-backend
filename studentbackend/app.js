@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const PORT = 5000
-const {MONGOURI} = require('./keys')
+const MONGOURI = 'mongodb://localhost/mycargarage'
 
 const profileRoutes = require('./routes/profileDetails')
 
@@ -16,16 +16,9 @@ app.use(require('./routes/assignment'))
 app.use('/profile',profileRoutes)
 app.use('/uploads',express.static('../Student/uploads'))
 
-mongoose.connect(MONGOURI, {
-    useNewUrlParser:true,
-    useUnifiedTopology:true
-})
-mongoose.connection.on('connected', ()=>{
-    console.log("connected to Mongo")
-})
-mongoose.connection.on('error', (err)=>{
-    console.log("err connecting : ", err)
-})
+mongoose.connect(MONGOURI, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log('MongoDB Connected...'))
+    .catch((err) => console.log(err))
 
 app.listen(PORT,()=>{
     console.log("server is running on ",PORT)
