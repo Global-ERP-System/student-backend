@@ -1,6 +1,9 @@
 const express = require('express');
 const router  = express.Router();
 const Profile = require('../models/Profile');
+const cors = require('cors')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const Joi = require('@hapi/joi');
 const multer = require('multer');
 
@@ -18,6 +21,22 @@ const ProfileValidation = data => {
     return schema.validate(data)
 }
 
+//This function can be used for user verification. It is not being used right now because the login in page is not ready
+function verifyToken(req, res, next) {
+    const bearHeader = req.headers['authorization'];
+
+    if(typeof bearHeader !== 'undefined'){
+        const bearer = bearHeader.split(' ')
+
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+
+        next();
+    } else{
+        res.sendStatus(403)
+    }
+}
+
 // API
 
     //Get all profiles
@@ -33,6 +52,8 @@ const ProfileValidation = data => {
 
     //Get profile details based on id
     router.get('/:id', async (req,res) => {
+
+        
         const id = req.params.id
         try{
             const profile = await  Profile.findById(id)
@@ -42,6 +63,8 @@ const ProfileValidation = data => {
             res.status(400).json({ message: err })
         }
     });
+
+    
 
     // This POST API is to add temporary data for testing
     router.post('/',async (req,res) => {

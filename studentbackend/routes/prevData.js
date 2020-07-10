@@ -26,6 +26,22 @@ const prevDataValidation = data => {
     return schema.validate(data)
 }
 
+    //This function can be used for user verification. It is not being used right now because the login in page is not ready
+    function verifyToken(req, res, next) {
+        const bearHeader = req.headers['authorization'];
+
+        if(typeof bearHeader !== 'undefined'){
+            const bearer = bearHeader.split(' ')
+
+            const bearerToken = bearer[1];
+            req.token = bearerToken;
+
+            next();
+        } else{
+            res.sendStatus(403)
+        }
+    }
+
     //Get Prev Data of all students
     router.get('/', async (req, res) => {
 
