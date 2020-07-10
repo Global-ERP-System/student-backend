@@ -10,12 +10,14 @@ const prevDataRoutes = require('./routes/prevData')
 require('./models/project')
 require('./models/assignment')
 require('./models/internship')
+require('./models/recommendation')
 
 app.use(express.json())
 
 app.use(require('./routes/project'))
 app.use(require('./routes/assignment'))
 app.use(require('./routes/internship'))
+app.use(require('./routes/recommendation'))
 
 app.use('/profile',profileRoutes)
 app.use('/prevData',prevDataRoutes)
