@@ -39,7 +39,7 @@ function verifyToken(req, res, next) {
 
 // API
 
-    //Get all profiles
+    //Get all profiles (This is temporary and just for testing)
     router.get('/', async (req,res) => {
         try{
             const profiles = await  Profile.find()

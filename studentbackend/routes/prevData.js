@@ -42,7 +42,7 @@ const prevDataValidation = data => {
         }
     }
 
-    //Get Prev Data of all students
+    //Get Prev Data of all students (This is temporary and just for testing)
     router.get('/', async (req, res) => {
 
         try{
