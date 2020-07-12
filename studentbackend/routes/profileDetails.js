@@ -67,7 +67,7 @@ function verifyToken(req, res, next) {
     
 
     // This POST API is to add temporary data for testing
-    router.post('/',async (req,res) => {
+    router.post('/add',async (req,res) => {
         if (!req.body) {
             return res.status(400).json({
             status: 'error',
@@ -155,7 +155,7 @@ function verifyToken(req, res, next) {
     });
 
     //edit Details
-    router.patch('/editDetails/:id', async (req, res) => {
+    router.patch('/edit/:id', async (req, res) => {
 
     //Validation
         const { error } = ProfileValidation(req.body);

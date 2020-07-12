@@ -6,6 +6,7 @@ const {MONGOURI} = require('./keys')
 
 const profileRoutes = require('./routes/profileDetails')
 const prevDataRoutes = require('./routes/prevData')
+const relationRoutes = require('./routes/relation')
 
 require('./models/project')
 require('./models/assignment')
@@ -21,6 +22,7 @@ app.use(require('./routes/recommendation'))
 
 app.use('/profile',profileRoutes)
 app.use('/prevData',prevDataRoutes)
+app.use('/find',relationRoutes)
 app.use('/uploads',express.static('../Student/uploads'))
 
 mongoose.connect(MONGOURI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
