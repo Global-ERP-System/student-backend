@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { string } = require('@hapi/joi');
 
 const ProfileSchema = mongoose.Schema({
     image : {

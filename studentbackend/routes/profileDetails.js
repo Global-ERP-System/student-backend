@@ -68,6 +68,7 @@ function verifyToken(req, res, next) {
 
     // This POST API is to add temporary data for testing
     router.post('/add',async (req,res) => {
+        console.log(req.body)
         if (!req.body) {
             return res.status(400).json({
             status: 'error',
