@@ -30,7 +30,7 @@ router.post('/certificate', async (req, res) => {
     })
 
     try{
-        const savedCertificate = await leave.save();
+        const savedCertificate = await certificate.save();
         res.status(200).json(savedCertificate);
     }
     catch(err){
@@ -45,8 +45,7 @@ router.post('/otherDocument', async (req, res) => {
 
     try{
         const savedDoc = await otherDocument.save();
-        console.log(savedDoc)
-        res.status(200).json(savedLeave);
+        res.status(200).json(savedDoc);
     }
     catch(err){
         res.status(400).json(err)
