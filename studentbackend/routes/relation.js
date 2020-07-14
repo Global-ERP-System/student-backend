@@ -31,8 +31,14 @@ router.patch('/connect/:id', async (req, res) => {
         const search_id = req.body.id;
         const my_id = req.params.my_id
         const options = { new : true }
-        const connected = await Profile.findByIdAndUpdate(my_id, {$push :{ connections : search_id} }, options);
-        res.status(200).json(connected)
+
+        //user's connections updated
+        const me_connected = await Profile.findByIdAndUpdate(my_id, {$push :{ connections : search_id} }, options);
+        res.status(200).json(me_connected)
+
+        //new friend's connections
+        const remote_connected = await Profile.findByIdAndUpdate(search_id, {$push :{ connections : me_id} }, options);
+        res.status(200).json(remote_connected)
     }
     catch(err){
         res.status(400).json(err)

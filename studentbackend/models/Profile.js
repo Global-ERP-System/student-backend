@@ -50,7 +50,9 @@ const ProfileSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    connections : []
+    connections : [],
+    chat_denied : [],
+    blocked_connections : []
 })
 
 module.exports = mongoose.model('Profile', ProfileSchema)
