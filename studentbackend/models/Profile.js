@@ -10,9 +10,25 @@ const ProfileSchema = mongoose.Schema({
         type : String,
         required : true
     },
+    last_name : {
+        type : String,
+        required : true  
+    },
     parent_name: {
         type : String,
         required : true
+    },
+    college : {
+        type : String,
+        required : true
+    },
+    batch : {
+        type : String,
+        required : true
+    },
+    discipline : {
+        type : String,
+        required : true  
     },
     reg_no: {
         type : String,
@@ -33,7 +49,8 @@ const ProfileSchema = mongoose.Schema({
     email: {
         type : String,
         required : true
-    }
+    },
+    connections : []
 })
 
 module.exports = mongoose.model('Profile', ProfileSchema)

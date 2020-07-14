@@ -77,7 +77,11 @@ function verifyToken(req, res, next) {
         }
         const profile = new Profile({
                 name : req.body.name,
+                last_name : req.body.last_name,
                 parent_name : req.body.parent_name,
+                college : req.body.college,
+                batch : req.body.batch,
+                discipline : req.body.discipline,
                 reg_no : req.body.reg_no,
                 roll_no : req.body.roll_no,
                 blood_group : req.body.blood_group,
@@ -90,10 +94,7 @@ function verifyToken(req, res, next) {
                 res.status(200).json(savedProfile)     
             }
             catch(err){
-                res.status(400).json({
-                status: 'error',
-                error: 'bad request',
-                });
+                res.status(400).json(err);
             }   
     });
 
