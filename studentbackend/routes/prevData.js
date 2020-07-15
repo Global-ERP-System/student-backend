@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const Prevdata = require('../models/PrevData');
+const isAuthorised = require('../middleware/requirelogin')
 const Joi = require ('@hapi/joi');
 
 const prevDataValidation = data => {
@@ -26,24 +27,8 @@ const prevDataValidation = data => {
     return schema.validate(data)
 }
 
-    //This function can be used for user verification. It is not being used right now because the login in page is not ready
-    function verifyToken(req, res, next) {
-        const bearHeader = req.headers['authorization'];
-
-        if(typeof bearHeader !== 'undefined'){
-            const bearer = bearHeader.split(' ')
-
-            const bearerToken = bearer[1];
-            req.token = bearerToken;
-
-            next();
-        } else{
-            res.sendStatus(403)
-        }
-    }
-
     //Get Prev Data of all students (This is temporary and just for testing)
-    router.get('/', async (req, res) => {
+    router.get('/', isAuthorised, async (req, res) => {
 
         try{
             const prevData = await Prevdata.find();
@@ -55,7 +40,7 @@ const prevDataValidation = data => {
     })
 
     //Get Prev Data details based on id
-    router.get('/:id', async (req, res) => {
+    router.get('/:id', isAuthorised, async (req, res) => {
         const id = req.params.id;
 
         try{
@@ -100,7 +85,7 @@ const prevDataValidation = data => {
     });
 
         //edit Previous Data
-    router.patch('/edit/:id', async (req,res) => {
+    router.patch('/edit/:id', isAuthorised, async (req,res) => {
 
         //Validation
         const { error } = prevDataValidation(req.body);

@@ -1,11 +1,12 @@
 const express = require('express')
 const Profile = require('../models/Profile')
 const router = express.Router()
+const isAuthorised = require('../middleware/requirelogin')
 const cors = require('cors')
 
 
 //Search results and Connection list
-router.get('/:id', async (req, res) => {
+router.get('/:id',isAuthorised, async (req, res) => {
 
     const my_id = req.params.id
 
@@ -25,7 +26,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //on Clicking Connect
-router.patch('/connect/:id', async (req, res) => {
+router.patch('/connect/:id',isAuthorised, async (req, res) => {
 
     try{
         const search_id = req.body.id;

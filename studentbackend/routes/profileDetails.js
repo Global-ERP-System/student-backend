@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Joi = require('@hapi/joi');
 const multer = require('multer');
+const isAuthorised = require('../middleware/requirelogin')
 
 const ProfileValidation = data => {
     const schema = Joi.object({
@@ -21,26 +22,10 @@ const ProfileValidation = data => {
     return schema.validate(data)
 }
 
-//This function can be used for user verification. It is not being used right now because the login in page is not ready
-function verifyToken(req, res, next) {
-    const bearHeader = req.headers['authorization'];
-
-    if(typeof bearHeader !== 'undefined'){
-        const bearer = bearHeader.split(' ')
-
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
-
-        next();
-    } else{
-        res.sendStatus(403)
-    }
-}
-
 // API
 
     //Get all profiles (This is temporary and just for testing)
-    router.get('/', async (req,res) => {
+    router.get('/', isAuthorised, async (req,res) => {
         try{
             const profiles = await  Profile.find()
             res.status(200).json(profiles)
@@ -128,7 +113,7 @@ function verifyToken(req, res, next) {
     });
   
     //Change profile photo
-    router.patch('/addPhoto/:id', upload.single('image'),  async (req,res) => {
+    router.patch('/addPhoto/:id', upload.single('image'), isAuthorised, async (req,res) => {
 
         try{
             const id = req.params.id;
@@ -143,7 +128,7 @@ function verifyToken(req, res, next) {
     });
 
     //Delete profile photo (actually setiing it to null so default profile photo can appear)
-    router.patch('/deletePhoto/:id', async (req,res) => {
+    router.patch('/deletePhoto/:id', isAuthorised, async (req,res) => {
         try{
             const id = req.params.id;
             const options = { new: true }
@@ -157,7 +142,7 @@ function verifyToken(req, res, next) {
     });
 
     //edit Details
-    router.patch('/edit/:id', async (req, res) => {
+    router.patch('/edit/:id', isAuthorised, async (req, res) => {
 
     //Validation
         const { error } = ProfileValidation(req.body);

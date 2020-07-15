@@ -1,12 +1,13 @@
 const express = require('express');
 const router  = express.Router();
+const isAuthorised = require('../middleware/requirelogin')
 const Joi = require ('@hapi/joi');
 const {Leave} = require('../models/Request')
 const {Certificate} = require('../models/Request')
 const {OtherDocument} = require('../models/Request')
 
 
-router.post('/leave', async (req, res) => {
+router.post('/leave', isAuthorised, async (req, res) => {
 
     const leave = new Leave({
         fromDate : req.body.fromDate,
@@ -24,7 +25,7 @@ router.post('/leave', async (req, res) => {
 
 });
 
-router.post('/certificate', async (req, res) => {
+router.post('/certificate',isAuthorised, async (req, res) => {
     const certificate = new Certificate({
         name : req.body.name
     })
@@ -38,7 +39,7 @@ router.post('/certificate', async (req, res) => {
     }
 })
 
-router.post('/otherDocument', async (req, res) => {
+router.post('/otherDocument',isAuthorised, async (req, res) => {
     const otherDocument = new OtherDocument({
         name : req.body.name
     })

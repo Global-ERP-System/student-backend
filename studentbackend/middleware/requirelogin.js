@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const {JWT_SECRET} = require('../keys')
 const mongoose = require('mongoose')
-const Student = mongoose.model('Student')
+const Student = require('../models/user')
 
 //assuming there is a student table 
 module.exports = (req,res,next)=>{
