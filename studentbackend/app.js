@@ -25,14 +25,6 @@ app.use('/prevData', prevDataRoutes);
 app.use('/find', relationRoutes);
 app.use('/uploads', express.static('../Student/uploads'));
 
-///////
-
-const gradeRoute = require('./routes/grade');
-
-app.use('/grade', gradeRoute);
-
-///////
-
 mongoose
   .connect(MONGOURI, {
     useNewUrlParser: true,
