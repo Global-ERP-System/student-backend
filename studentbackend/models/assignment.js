@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const {ObjectId} = mongoose.Schema.Types
 
 const assignmentSchema = new mongoose.Schema({
     name: {
@@ -24,7 +25,11 @@ const assignmentSchema = new mongoose.Schema({
     link: {
         type: String,
         required : true
+    },
+    postedBy: {
+        type: ObjectId,
+        ref: 'Student'
     }
 })
 
-module.exports = mongoose.model("Assignment",assignmentSchema)
+mongoose.model("Assignment",assignmentSchema)
